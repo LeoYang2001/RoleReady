@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  ChevronRight,
-  User,
-  Briefcase,
-  Code,
-  Check,
-} from "lucide-react";
+import { ChevronRight, User, Briefcase, Code, Check } from "lucide-react";
 import "./ResumeBuilder.css";
 
 interface BasicInfo {
@@ -105,7 +99,7 @@ const SUGGESTED_SKILLS = [
 
 interface Question {
   id: string;
-  type: 'text' | 'email' | 'url' | 'education' | 'work' | 'skills';
+  type: "text" | "email" | "url" | "education" | "work" | "skills";
   question: string;
   placeholder?: string;
   required?: boolean;
@@ -113,43 +107,43 @@ interface Question {
 
 const METADATA_QUESTIONS: Question[] = [
   {
-    id: 'name',
-    type: 'text',
+    id: "name",
+    type: "text",
     question: "What's your full name?",
     placeholder: "John Doe",
-    required: true
+    required: true,
   },
   {
-    id: 'email',
-    type: 'email',
+    id: "email",
+    type: "email",
     question: "What's your email address?",
     placeholder: "john@example.com",
-    required: true
+    required: true,
   },
   {
-    id: 'linkedin',
-    type: 'url',
+    id: "linkedin",
+    type: "url",
     question: "What's your LinkedIn profile URL? (Optional)",
-    placeholder: "https://linkedin.com/in/johndoe"
+    placeholder: "https://linkedin.com/in/johndoe",
   },
   {
-    id: 'education',
-    type: 'education',
+    id: "education",
+    type: "education",
     question: "Tell us about your education",
-    placeholder: "Add your degrees, schools, and graduation years"
+    placeholder: "Add your degrees, schools, and graduation years",
   },
   {
-    id: 'work',
-    type: 'work',
+    id: "work",
+    type: "work",
     question: "What's your work experience?",
-    placeholder: "Add your job titles, companies, and descriptions"
+    placeholder: "Add your job titles, companies, and descriptions",
   },
   {
-    id: 'skills',
-    type: 'skills',
+    id: "skills",
+    type: "skills",
     question: "What are your key skills?",
-    placeholder: "Select from popular skills or add your own"
-  }
+    placeholder: "Select from popular skills or add your own",
+  },
 ];
 
 const ResumeBuilder = () => {
@@ -302,10 +296,10 @@ const ResumeBuilder = () => {
     const currentQ = METADATA_QUESTIONS[currentQuestion];
     if (currentQ.required) {
       switch (currentQ.id) {
-        case 'name':
-          return userMetadata.basicInfo.name.trim() !== '';
-        case 'email':
-          return userMetadata.basicInfo.email.trim() !== '';
+        case "name":
+          return userMetadata.basicInfo.name.trim() !== "";
+        case "email":
+          return userMetadata.basicInfo.email.trim() !== "";
         default:
           return true;
       }
@@ -341,9 +335,13 @@ const ResumeBuilder = () => {
         <div className="step-content">
           <div className="question-progress">
             <div className="progress-bar-wrapper">
-              <div 
-                className="progress-fill" 
-                style={{ width: `${((currentQuestion + 1) / METADATA_QUESTIONS.length) * 100}%` }}
+              <div
+                className="progress-fill"
+                style={{
+                  width: `${
+                    ((currentQuestion + 1) / METADATA_QUESTIONS.length) * 100
+                  }%`,
+                }}
               ></div>
             </div>
             <span className="progress-text">
@@ -353,14 +351,16 @@ const ResumeBuilder = () => {
 
           <div className="question-container">
             <h2>{METADATA_QUESTIONS[currentQuestion].question}</h2>
-            
+
             {/* Basic Info Questions */}
-            {METADATA_QUESTIONS[currentQuestion].id === 'name' && (
+            {METADATA_QUESTIONS[currentQuestion].id === "name" && (
               <div className="answer-section">
                 <input
                   type="text"
                   value={userMetadata.basicInfo.name}
-                  onChange={(e) => handleBasicInfoUpdate('name', e.target.value)}
+                  onChange={(e) =>
+                    handleBasicInfoUpdate("name", e.target.value)
+                  }
                   placeholder={METADATA_QUESTIONS[currentQuestion].placeholder}
                   className="question-input"
                   autoFocus
@@ -368,12 +368,14 @@ const ResumeBuilder = () => {
               </div>
             )}
 
-            {METADATA_QUESTIONS[currentQuestion].id === 'email' && (
+            {METADATA_QUESTIONS[currentQuestion].id === "email" && (
               <div className="answer-section">
                 <input
                   type="email"
                   value={userMetadata.basicInfo.email}
-                  onChange={(e) => handleBasicInfoUpdate('email', e.target.value)}
+                  onChange={(e) =>
+                    handleBasicInfoUpdate("email", e.target.value)
+                  }
                   placeholder={METADATA_QUESTIONS[currentQuestion].placeholder}
                   className="question-input"
                   autoFocus
@@ -381,12 +383,14 @@ const ResumeBuilder = () => {
               </div>
             )}
 
-            {METADATA_QUESTIONS[currentQuestion].id === 'linkedin' && (
+            {METADATA_QUESTIONS[currentQuestion].id === "linkedin" && (
               <div className="answer-section">
                 <input
                   type="url"
                   value={userMetadata.basicInfo.linkedin}
-                  onChange={(e) => handleBasicInfoUpdate('linkedin', e.target.value)}
+                  onChange={(e) =>
+                    handleBasicInfoUpdate("linkedin", e.target.value)
+                  }
                   placeholder={METADATA_QUESTIONS[currentQuestion].placeholder}
                   className="question-input"
                   autoFocus
@@ -395,7 +399,7 @@ const ResumeBuilder = () => {
             )}
 
             {/* Education Question */}
-            {METADATA_QUESTIONS[currentQuestion].id === 'education' && (
+            {METADATA_QUESTIONS[currentQuestion].id === "education" && (
               <div className="answer-section">
                 <div className="dynamic-list">
                   {userMetadata.education.map((edu) => (
@@ -404,21 +408,31 @@ const ResumeBuilder = () => {
                         <input
                           type="text"
                           value={edu.degree}
-                          onChange={(e) => updateEducation(edu.id, "degree", e.target.value)}
+                          onChange={(e) =>
+                            updateEducation(edu.id, "degree", e.target.value)
+                          }
                           placeholder="Degree (e.g., Bachelor of Science)"
                           className="form-input"
                         />
                         <input
                           type="text"
                           value={edu.school}
-                          onChange={(e) => updateEducation(edu.id, "school", e.target.value)}
+                          onChange={(e) =>
+                            updateEducation(edu.id, "school", e.target.value)
+                          }
                           placeholder="School/University"
                           className="form-input"
                         />
                         <input
                           type="text"
                           value={edu.graduationYear}
-                          onChange={(e) => updateEducation(edu.id, "graduationYear", e.target.value)}
+                          onChange={(e) =>
+                            updateEducation(
+                              edu.id,
+                              "graduationYear",
+                              e.target.value
+                            )
+                          }
                           placeholder="Year"
                           className="form-input"
                         />
@@ -439,7 +453,7 @@ const ResumeBuilder = () => {
             )}
 
             {/* Work Experience Question */}
-            {METADATA_QUESTIONS[currentQuestion].id === 'work' && (
+            {METADATA_QUESTIONS[currentQuestion].id === "work" && (
               <div className="answer-section">
                 <div className="dynamic-list">
                   {userMetadata.workExperience.map((work) => (
@@ -448,28 +462,52 @@ const ResumeBuilder = () => {
                         <input
                           type="text"
                           value={work.jobTitle}
-                          onChange={(e) => updateWorkExperience(work.id, "jobTitle", e.target.value)}
+                          onChange={(e) =>
+                            updateWorkExperience(
+                              work.id,
+                              "jobTitle",
+                              e.target.value
+                            )
+                          }
                           placeholder="Job Title"
                           className="form-input"
                         />
                         <input
                           type="text"
                           value={work.company}
-                          onChange={(e) => updateWorkExperience(work.id, "company", e.target.value)}
+                          onChange={(e) =>
+                            updateWorkExperience(
+                              work.id,
+                              "company",
+                              e.target.value
+                            )
+                          }
                           placeholder="Company"
                           className="form-input"
                         />
                         <input
                           type="text"
                           value={work.duration}
-                          onChange={(e) => updateWorkExperience(work.id, "duration", e.target.value)}
+                          onChange={(e) =>
+                            updateWorkExperience(
+                              work.id,
+                              "duration",
+                              e.target.value
+                            )
+                          }
                           placeholder="Duration (e.g., Jan 2022 - Present)"
                           className="form-input"
                         />
                       </div>
                       <textarea
                         value={work.description}
-                        onChange={(e) => updateWorkExperience(work.id, "description", e.target.value)}
+                        onChange={(e) =>
+                          updateWorkExperience(
+                            work.id,
+                            "description",
+                            e.target.value
+                          )
+                        }
                         placeholder="Describe your responsibilities and achievements..."
                         className="form-textarea"
                         rows={3}
@@ -490,7 +528,7 @@ const ResumeBuilder = () => {
             )}
 
             {/* Skills Question */}
-            {METADATA_QUESTIONS[currentQuestion].id === 'skills' && (
+            {METADATA_QUESTIONS[currentQuestion].id === "skills" && (
               <div className="answer-section">
                 <div className="skills-question">
                   <div className="suggested-skills">
@@ -501,16 +539,20 @@ const ResumeBuilder = () => {
                           key={skill}
                           onClick={() => addSkill(skill)}
                           className={`skill-tag ${
-                            userMetadata.skills.includes(skill) ? "selected" : ""
+                            userMetadata.skills.includes(skill)
+                              ? "selected"
+                              : ""
                           }`}
                         >
                           {skill}
-                          {userMetadata.skills.includes(skill) && <Check size={14} />}
+                          {userMetadata.skills.includes(skill) && (
+                            <Check size={14} />
+                          )}
                         </button>
                       ))}
                     </div>
                   </div>
-                  
+
                   <div className="custom-skill-input">
                     <input
                       type="text"
@@ -564,12 +606,14 @@ const ResumeBuilder = () => {
                   Previous
                 </button>
               )}
-              <button 
-                onClick={nextQuestion} 
+              <button
+                onClick={nextQuestion}
                 className="next-btn"
                 disabled={!canProceedToNext()}
               >
-                {currentQuestion === METADATA_QUESTIONS.length - 1 ? "Complete Profile" : "Next"}
+                {currentQuestion === METADATA_QUESTIONS.length - 1
+                  ? "Complete Profile"
+                  : "Next"}
                 <ChevronRight size={16} />
               </button>
             </div>
